@@ -1,0 +1,97 @@
+<html>
+<head>
+    <title>Friends Log In</title>
+    {% load staticfiles %}
+      <!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" href="{% static 'friend/css/styles.css' %}"media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+    <div id="main">
+    <h1>Welcome to 'Friends'</h1>
+
+        <div class='form'>
+
+        {% if messages %}
+            <ul class="{{message.tags}}">
+                {% for message in messages %}
+                    {% if 'registration' in message.tags %}
+                        <li class="messages">
+                        {{message}}
+                        </li>
+                    {% endif %}
+                {% endfor%}
+            </ul>
+        {% endif %}
+
+
+        <form action='/register' method='POST'>
+            {% csrf_token %}
+        <h2>Register</h2>
+            <div class="form_field">
+                <label for="name">Name:
+                    <input type="text" name="name" id="name">
+                </label>
+            </div>
+            <div class="form_field">
+                <label for="alias">Alias:
+                    <input type="text" name="alias" id="alias">
+                </label>
+            </div>
+            <div class="form_field">
+                <label for="email">Email:
+                    <input type="text" name="email" id="email">
+                </label>
+            </div>
+            <div class="form_field">
+                <label for="password">Password:
+                    <input type="password" name="password" id="password">
+                    <p>* Password must be at least 8 characters</p>
+                </label>
+            </div>
+            <div class="form_field">
+                <label for="confirm">Confirm Password:
+                    <input type="password" name="confirm" id="confirm">
+                </label>
+            </div>
+            <div class="form_field">
+                <label for="date">Date of Birth:
+                    <input type="date" name="birth_date" id="birth_date">
+                </label>
+            </div>
+            <input type="submit" value="Register" class="button">
+        </form>
+        </div>
+
+        <div class='form'>
+        <form action='/login' method='POST'>
+            {% csrf_token %}
+
+            <h2>Log In</h2>
+                {% if messages %}
+                    <ul class="{{message.tags}}">
+                    {% for message in messages %}
+                        {% if 'login' in message.tags %}
+                            <li class="messages">
+                            {{message}}
+                            </li>
+                        {% endif %}
+                    {% endfor%}
+                    </ul>
+                {% endif %}
+
+            <div class="form_field">
+                <label for="email">Email:
+                    <input type="text" name="email" id="email">
+                </label>
+            </div>
+            <div class="form_field">
+                <label for="password">Password:
+                    <input type="password" name="password" id="password">
+                </label>
+            </div>
+            <input type="submit" value="Log in" class="button">
+        </form>
+        </div>
+    </div>
+</body>
+</html>
